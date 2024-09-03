@@ -1,33 +1,526 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+/* ============== custom css ==================== */
+* {
+  outline: unset !important;
+}
+.dropdown:hover  .dropdown-menu {
+  display: block;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+[list]::-webkit-calendar-picker-indicator {
+  display: none;
+  background-color: inherit;
+  opacity: 0
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(55 65 81);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.mooving-line {
+  animation: lineH 4s 4s infinite reverse;
+}
+
+@keyframes lineH {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.animate-up {
+  position: relative;
+  animation: animateup 1s
 }
 
+@keyframes animateup {
+  from {
+    bottom: -100px;
+    opacity: 0
+  }
+
+  to {
+    bottom: 0;
+    opacity: 1
+  }
+}
+.animate-down {
+  position: relative;
+  animation: animatedown 1s
+}
+
+@keyframes animatedown {
+  from{
+    top: -40px;
+    opacity: 0
+  }
+  to {
+    top: 0px;
+    opacity: 1
+  }
+
+
+}
+
+
+.fade-in {
+  animation: opac 0.8s
+}
+
+@keyframes opac {
+  from {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
+}
+
+ 
+ 
+
+/* =============================================== */
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .bg-white{
+    background-color: transparent !important;
+  } 
+  .text-gray-800 {
+    @apply  text-black dark:text-gray-300
   }
+}
+
+@layer base {
+  table {
+    @apply text-base text-left
+  }
+
+  thead tr {
+    @apply bg-neutral-400/[.3] border-b dark:bg-gray-800 dark:border-gray-950 whitespace-nowrap
+  }
+
+  tbody tr {
+    @apply bg-neutral-400/[.6] border-b dark:bg-gray-700 dark:border-gray-950
+  }
+  thead tr th {
+    @apply px-3 py-3 border-r  dark:border-gray-950 whitespace-nowrap
+  }  
+  tbody tr td {
+    @apply px-3 py-2 border-r dark:border-gray-950 whitespace-nowrap
+  }
+  tfoot tr td {
+    @apply px-0 py-2 border-r dark:border-gray-950
+  }
+}
+
+
+
+@layer components {
+
+
+  /* =============== Fixed Header Table================== */
+ 
+  .fixed-head {
+    @apply sticky top-0;  
+  }
+ 
+  /* =============== BACKGROUND================== */
+  .c-bg-toggle {
+    @apply bg-neutral-400 dark:bg-gray-500
+  }
+  .c-bg-light-xtra {
+    @apply bg-neutral-500 dark:bg-gray-600
+  }
+
+  .c-bg-light {
+    @apply bg-neutral-600/[.4] dark:bg-gray-900
+  }
+
+  .c-bg-dark {
+    @apply bg-neutral-400 dark:bg-gray-800
+ 
+  }
+  .c-bg-error {
+    @apply bg-rose-400 dark:bg-rose-700
+  }
+  .c-bg-success {
+    @apply bg-teal-500 dark:bg-teal-400
+  }
+  
+  /* =============== BORDER================== */
+  /* .border-2{
+    @apply border border-neutral-400 dark:border-white/[.1]
+   }
+   .border-l-2{
+    @apply border border-neutral-400 dark:border-white/[.1]
+  }
+   .border-r-2{
+    @apply border border-neutral-400 dark:border-white/[.1]
+   }
+  .border-b-2{
+    @apply border border-neutral-400 dark:border-white/[.1]
+  } */
+  .border-t-2,.border-2,.border-l-2,.border-r-2,.border-b-2{
+    @apply dark:border-white/[.2]
+  }
+
+  .c-border-light {
+    @apply border border-neutral-400 dark:border-white/[.3]
+  }
+
+  .c-border-light-hover {
+    @apply hover:border-gray-400 dark:hover:border-white/[.5]
+  }
+
+  .c-border-dark {
+    @apply border border-gray-300 dark:border-white/[.3]
+  }
+
+  .c-border-dark-hover {
+    @apply hover:border-gray-950 dark:hover:border-white/[.9]
+  }
+
+  .c-border-error {
+    @apply border border-rose-600 dark:border-rose-400
+  }
+
+  .c-border-error-hover {
+    @apply border border-rose-600 dark:border-rose-400
+  }
+
+  .c-border-success {
+    @apply border border-teal-700 dark:border-teal-400
+  }
+
+
+  .c-border-success-hover {
+    @apply border border-teal-700 dark:border-teal-300
+  }
+
+  .c-border-b-light {
+    @apply border-b border-gray-200 dark:border-white/[.1]
+  }
+
+  .c-border-t-light {
+    @apply border-t border-gray-200 dark:border-white/[.1]
+  }
+
+  .c-border-b-dark {
+    @apply border-b border-white/[.3] dark:border-white/[.1]
+  }
+
+  .c-border-t-success {
+    @apply border-t border-t-teal-600 dark:border-t-teal-400
+  }
+
+  .c-border-t-success-hover {
+    @apply hover:border-t hover:border-t-teal-600 dark:hover:border-t-teal-400
+  }
+
+  
+  /* =============== BUTTON ================== */
+  .btn {
+    @apply max-h-9 inline-flex px-3 py-1 leading-6 rounded-md justify-center items-center gap-2 font-medium capitalize shadow-sm align-middle text-base opacity-80 hover:opacity-100 transition disabled:cursor-not-allowed disabled:opacity-50
+  }
+
+  .btn-outline-light {
+    @apply btn c-border-light c-border-light-hover shadow-gray-400 dark:shadow-gray-500
+  }
+
+  .btn-outline-dark {
+    @apply btn c-border-dark c-border-light-hover shadow-gray-400 dark:shadow-gray-500
+  }
+
+  .btn-outline-success {
+    @apply btn c-border-success c-border-success-hover shadow-teal-600 dark:shadow-teal-500 c-text-success
+  }
+  .btn-outline-error {
+    @apply btn c-border-error c-border-error-hover shadow-rose-600 dark:shadow-teal-500 c-text-success
+  }
+  .btn-link-success {
+    @apply btn c-text-success c-text-success-hover c-border-dark c-border-light-hover rounded-full text-sm
+  }
+  .btn-link-error {
+    @apply btn c-text-error c-text-error-hover c-border-dark c-border-light-hover rounded-full text-sm
+  }
+  .btn-outline-error {
+    @apply btn c-border-error c-border-error-hover shadow-rose-400 dark:shadow-rose-500 c-text-error
+  }
+ 
+  /* =============== TEXT ================== */
+  .c-text-light {
+    @apply text-black dark:text-gray-100
+  }
+
+  .c-text-dark{
+    @apply text-black dark:text-gray-400
+  }
+
+  .c-text-success ,.attendance-Present,.leave-Casual,.leave-Earned {
+    @apply text-teal-700 dark:text-teal-300
+  }
+
+  .c-text-success-hover {
+    @apply hover:text-teal-600 dark:hover:text-teal-200
+  }
+
+  .c-text-error ,.attendance-Leave,.leave-Paid{
+    @apply text-rose-600 dark:text-rose-400  text-sm
+  }
+  .c-text-error-hover {
+    @apply hover:text-rose-500 dark:hover:text-rose-200
+  }
+  .c-text-gradient{
+    @apply bg-gradient-to-r from-teal-600 via-gray-700 to-black dark:from-teal-300 dark:via-gray-400 dark:to-gray-300   text-transparent bg-clip-text
+  }
+  /* =============== FORM ================== */
+  .c-form-label {
+    @apply block mb-2 text-xs font-medium c-text-dark capitalize
+  }
+
+  .c-base-input {
+    @apply py-1 px-2 w-full rounded-md shadow-sm align-middle transition-all font-light text-lg c-text-light bg-neutral-300/[.4] hover:bg-white dark:bg-gray-700 dark:hover:bg-gray-800 opacity-80 hover:opacity-100
+  }
+
+  .c-input {
+    @apply c-base-input c-border-dark
+  }
+
+
+  .c-input-error {
+    @apply c-base-input c-border-error
+  }
+
+  .c-input-success {
+    @apply c-base-input c-border-success c-text-success
+  }
+
+  .c-chips {
+    @apply bg-neutral-600/[.4] hover:bg-neutral-500/[.4] pr-1 pl-2 dark:bg-gray-500 dark:hover:bg-gray-400 rounded-full capitalize
+  }
+
+
+  /* .c-chips-close{
+  @apply bg-gray-100 hover:bg-white h-1
+  dark:bg-gray-900 dark:hover:bg-gray-800 
+   rounded-full
+ } */
+
+
+  /* =============== MENU ITEM================== */
+  .menu-item {
+    @apply hover:bg-neutral-300/[.4]  dark:hover:bg-gray-600
+  }
+  .menu-item-open {
+    @apply bg-neutral-600/[.2] dark:bg-gray-600
+  }
+  .menu-item-sub {
+    @apply bg-neutral-600/[.2] bg-opacity-50 dark:bg-gray-700
+  }
+
+
+  .menu-item-active {
+    @apply bg-teal-700 hover:bg-teal-600 dark:bg-teal-700 dark:hover:bg-teal-600 text-white
+  }
+
+  /* =============== SVG FILL COLOR================== */
+  .fill-svg-white {
+    @apply fill-white
+  }
+  .fill-svg-light {
+    @apply fill-black dark:fill-gray-100
+  }
+
+  .fill-svg-dark {
+    @apply fill-black dark:fill-gray-400
+  }
+
+  .fill-svg-success {
+    @apply fill-teal-700 dark:fill-teal-400
+  }
+
+  .fill-svg-error {
+    @apply fill-rose-600 dark:fill-rose-400
+  }
+
+  /* =============== Tabs ================== */
+
+  .c-tab {
+    @apply inline-flex items-center justify-center p-2 rounded-t-lg text-black dark:text-gray-400
+  }
+
+  .active-tab {
+    @apply c-tab text-teal-700 border-b-2 border-teal-700 dark:text-teal-500 dark:border-teal-500
+  }
+
+  .in-active-tab {
+    @apply c-tab border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300
+  }
+
+  /* =============== Alert ================== */
+  .base-alert {
+    @apply flex animate-up items-center px-6 py-4 opacity-90 bg-gradient-to-br z-20
+  }
+
+  .info {
+    @apply base-alert text-teal-950 from-teal-300 to-teal-50
+  }
+
+  .success {
+    @apply base-alert text-green-950 from-green-300 to-green-50
+  }
+
+  .warn {
+    @apply base-alert text-yellow-950 from-yellow-300 to-rose-50
+  }
+
+  .error {
+    @apply base-alert text-rose-950 from-rose-300 to-rose-50
+  }
+
+  /* =============== Alert bottom line================== */
+  .bottom-line {
+    @apply h-3 z-30 bg-gradient-to-tr mooving-line
+  }
+
+  .info-bottom-line {
+    @apply bottom-line from-teal-900 to-teal-500
+  }
+
+  .success-bottom-line {
+    @apply bottom-line from-green-900 to-green-500
+  }
+
+  .warn-bottom-line {
+    @apply bottom-line from-yellow-900 to-yellow-500
+  }
+
+  .error-bottom-line {
+    @apply bottom-line from-rose-900 to-rose-500
+  }
+
+  /* =============== OTHER ================== */
+  .or-divider {
+    @apply py-3 flex items-center text-xs text-black uppercase before:flex-[1_1_0%] before:border-t before:border-gray-200 before:mr-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ml-6 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600
+  }
+
+  .c-dropdown {
+    @apply c-border-light mt-1 p-1 shadow-lg bg-white rounded-lg dark:bg-transparent divide-y divide-solid divide-gray-200 dark:divide-white/[.2]
+  }
+
+  /* =============== Pegination ================== */
+  .peg-no-base {
+    @apply pt-3 mr-4 px-2 cursor-pointer
+  }
+
+  .peg-no {
+    @apply peg-no-base c-border-t-success-hover c-text-success-hover
+  }
+
+  .peg-no-act {
+    @apply peg-no-base c-text-success c-border-t-success
+  }
+
+  .peg-no-prev-next {
+    @apply c-text-success-hover flex items-center disabled:cursor-no-drop disabled:opacity-20 mt-3
+  }
+  .full-overlay {
+    @apply  z-10 bg-gray-950 bg-opacity-50 flex  justify-center items-center fixed top-0 right-0 left-0 bottom-0 h-screen w-screen
+  }
+  .modal {
+    @apply bg-gray-200   dark:bg-gray-700 rounded-md  shadow-lg shadow-gray-950 animate-up
+  }
+  .nested {
+    @apply bg-white dark:bg-gray-800 px-0
+  }
+
+
+  /* =============== Calendar ================== */
+
+  .date-wrap{
+    @apply bg-neutral-400/[.4]  dark:bg-gray-700 c-text-light
+  }
+  .cust-cal .rc-bg-white {
+    @apply bg-neutral-50 border-teal-900   dark:bg-gray-800 c-text-light
+  }
+
+
+  .cust-cal .rc-border-t-2 {
+    @apply  border-t dark:border-gray-950
+   
+  }
+  
+  .cust-cal .rc-border-r-2 {
+    @apply  border-r dark:border-gray-950
+  }
+  
+  .cust-cal .rc-border-b-2 {
+    @apply border-b dark:border-gray-950
+  }
+  
+  .cust-cal .rc-border-l-2 {
+    @apply border-l dark:border-gray-950
+  }
+  .cust-cal .rc-cursor-pointer {
+    @apply btn-outline-light
+  }
+  .cust-cal .rc-border-indigo-600 {
+    @apply c-text-success
+  }
+  .cust-cal .rc-w-72{
+    @apply border-b dark:border-gray-950
+  }
+  .cust-cal .rc-divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+    @apply border-gray-300 dark:border-white/[.2]
+  }
+   
+}
+.border-2{
+  border-width: 1px !important;
+ }
+ .border-l-2{
+  border-left-width: 1px !important;
+}
+ .border-r-2{
+   border-right-width: 1px !important;
+ }
+.border-b-2{
+ border-bottom-width: 1px !important;
+}
+.border-t-2{
+  border-top-width: 1px !important;
+}
+.h-48{
+  height: 100px !important;
 }
